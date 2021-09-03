@@ -5,9 +5,10 @@ Mock.mock('/api/user/login', {
     "id|1-1000": 12,
     "username": "admin",
     "email": "admin@51purse.com",
+    "adress": "上海市",
     "phone": null,
     "role": 0,
-    "createTime": 1111111479048325000,
+    "createTime": 1479048325000,
     "updateTime": 1479048325000
   }
 })
