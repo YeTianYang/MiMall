@@ -1,4 +1,4 @@
-const STORAGE_KEY = "mall"
+// const STORAGE_KEY = "mall"
 
 export default {
   //存储值

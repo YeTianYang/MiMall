@@ -16,7 +16,12 @@ export default {
   components: {
   },
   mounted () {
-    this.$axios.get('/mock/user/login.json').then((res) => {
+    //本地json
+    // this.$axios.get('/mock/user/login.json').then((res) => {
+    //   this.res = res
+    // })
+    //本地集成mockjs实现数据mock
+    this.$axios.get('/user/login').then((res) => {
       this.res = res
     })
   }

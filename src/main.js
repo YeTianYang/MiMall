@@ -5,8 +5,14 @@ import axios from 'axios'
 Vue.prototype.$axios = axios
 
 import App from './App.vue'
+
+//mock 开关
+const mock = true;
+if (mock) {
+  require('./mock/api')
+}
 //接口基地址
-// axios.defaults.baseURL = '/api';
+axios.defaults.baseURL = '/api';
 
 axios.defaults.timeout = 8000
 //响应拦截器
