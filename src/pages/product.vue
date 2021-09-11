@@ -1,10 +1,11 @@
 <template>
-  <div>购物车页面</div>
+  <div>product</div>
 </template>
 
 <script>
 export default {
-  name: 'cart',
+  name: 'product'
+
 }
 </script>
 

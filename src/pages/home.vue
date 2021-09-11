@@ -1,6 +1,7 @@
 <template>
   <div>
     <NavHeader></NavHeader>
+    <!-- <roter-view></roter-view> -->
   </div>
 </template>
 

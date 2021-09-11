@@ -1,15 +1,15 @@
 <template>
-  <div class="header">
-    <div class="nav-bar">
-      <div class="container">
-        <div class=""></div>
-      </div>
-    </div>
+  <div>
+    <Navheader></Navheader>
   </div>
 </template>
 
 <script>
+import Navheader from '../components/NavHeader.vue'
 export default {
+  components: {
+    Navheader,
+  }
 
 }
 </script>
