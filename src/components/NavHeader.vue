@@ -226,6 +226,7 @@ export default {
             border-top: 1px solid #e5e5e5;
             overflow: hidden;
             transition: all 0.5s;
+            background-color: #fff;
             ul {
               width: 100%;
               .product {
