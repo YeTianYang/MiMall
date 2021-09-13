@@ -1,21 +1,21 @@
 <template>
   <div class="all">
     <nav-header></nav-header>
-    <service-bar></service-bar>
+    <!-- <service-bar></service-bar> -->
+    <router-view></router-view>
     <nav-footer></nav-footer>
-    <!-- <roter-view></roter-view> -->
   </div>
 </template>
 
 <script>
 import NavHeader from '../components/NavHeader.vue'
 import NavFooter from '../components/NavFooter.vue'
-import ServiceBar from '../components/ServiceBar.vue'
+// import ServiceBar from '../components/ServiceBar.vue'
 export default {
   components: {
     NavHeader,
     NavFooter,
-    ServiceBar,
+    // ServiceBar,
   }
 }
 </script>
