@@ -25,31 +25,31 @@
               </div>
             </li>
             <li class="menu-item">
-              <a href="">电视 盒子</a>
+              <a href="" class="icon-arrow">电视 盒子</a>
               <div class="children"></div>
             </li>
             <li class="menu-item">
-              <a href="">笔记本 平板</a>
+              <a href="" class="icon-arrow">笔记本 平板</a>
               <div class="children"></div>
             </li>
             <li class="menu-item">
-              <a href="">家电 插线板</a>
+              <a href="" class="icon-arrow">家电 插线板</a>
               <div class="children"></div>
             </li>
             <li class="menu-item">
-              <a href="">出行 穿戴</a>
+              <a href="" class="icon-arrow">出行 穿戴</a>
               <div class="children"></div>
             </li>
             <li class="menu-item">
-              <a href="">耳机 音箱</a>
+              <a href="" class="icon-arrow">耳机 音箱</a>
               <div class="children"></div>
             </li>
             <li class="menu-item">
-              <a href="">电源 配件</a>
+              <a href="" class="icon-arrow">电源 配件</a>
               <div class="children"></div>
             </li>
             <li class="menu-item">
-              <a href="">生活 箱包</a>
+              <a href="" class="icon-arrow">生活 箱包</a>
               <div class="children"></div>
             </li>
           </ul>
@@ -64,9 +64,47 @@
           <div class="swiper-pagination" slot="pagination"></div>
         </swiper>
       </div>
-      <div class="ads-box"></div>
-      <div class="banner"></div>
-      <div class="product-pox"></div>
+      <div class="ads-box">
+        <a
+          :href="`/#/product/${item.id}`"
+          v-for="(item, index) in adsList"
+          :key="index"
+        >
+          <img :src="item.img" alt="" />
+        </a>
+      </div>
+      <div class="banner">
+        <a :href="`/#/product/30`">
+          <img src="/imgs/banner-1.png" alt="" />
+        </a>
+      </div>
+    </div>
+    <div class="product-box">
+      <div class="container">
+        <h2 class="title">手机</h2>
+        <div class="wrapper">
+          <div class="banner-left">
+            <a :href="`/#/product/12`">
+              <img src="/imgs/mix-alpha.jpg" alt="" />
+            </a>
+          </div>
+          <div class="list-box">
+            <div class="list" v-for="(item, i) in phoneList" :key="i">
+              <div class="item" v-for="(phone, j) in item" :key="j">
+                <span :class="{ 'new-pro': j % 2 == 0 }">新品</span>
+                <div class="item-img">
+                  <img :src="phone.mainImage" alt="" />
+                </div>
+                <div class="item-info">
+                  <h3>{{ phone.name }}</h3>
+                  <p>{{ phone.subtitle }}</p>
+                  <p class="price">{{ phone.price }}元</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     <service-bar></service-bar>
   </div>
@@ -163,10 +201,44 @@ export default {
         [0, 0, 0, 0],
         [0, 0, 0, 0],
         [0, 0, 0, 0],
-      ]
+      ],
+      adsList: [
+        {
+          id: 33,
+          img: '/imgs/ads/ads-1.png'
+        },
+        {
+          id: 48,
+          img: '/imgs/ads/ads-2.jpg'
+        },
+        {
+          id: 45,
+          img: '/imgs/ads/ads-3.png'
+        },
+        {
+          id: 47,
+          img: '/imgs/ads/ads-4.jpg'
+        },
+      ],
+      phoneList: [[]]
+    }
+  },
+  mounted () {
+    this.init()
+  },
+  methods: {
+    init () {
+      this.$axios.get('products', {
+        params: {
+          categoryId: 100012,
+          pageSize: 8
+        }
+      }).then(res => {
+        // console.log(res)
+        this.phoneList = [res.list.slice(0, 4), res.list.slice(4, 8)]
+      })
     }
   }
-
 }
 </script>
 
@@ -235,6 +307,7 @@ export default {
               }
               img {
                 width: 35px;
+                height: 42px;
                 vertical-align: middle;
               }
             }
@@ -250,6 +323,112 @@ export default {
       }
       .swiper-button-prev {
         left: 274px;
+      }
+    }
+  }
+  .ads-box {
+    @include flex();
+    margin-top: 14px;
+    margin-bottom: 31px;
+    a {
+      width: 296px;
+      height: 167px;
+    }
+  }
+  .banner {
+    height: 130px;
+    margin-bottom: 50px;
+    a {
+      display: block;
+      height: 130px;
+    }
+  }
+  .product-box {
+    // height: 740px;
+    background-color: $colorJ;
+    .container {
+      padding-bottom: 50px;
+      .title {
+        height: 71px;
+        line-height: 71px;
+        font-size: 22px;
+        font-family: FZLanTingHeiS-R-GB;
+        font-weight: bold;
+        color: #333333;
+      }
+      .wrapper {
+        display: flex;
+        // margin-bottom: 50px;
+        .banner-left {
+          width: 224px;
+          height: 619px;
+        }
+        .list-box {
+          margin-left: 16px;
+          .list {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 14px;
+            &:last-child {
+              margin-bottom: 0px;
+            }
+            .item {
+              width: 236px;
+              height: 302px;
+              font-weight: bold;
+              text-align: center;
+              background-color: $colorG;
+              span {
+                display: inline-block;
+                width: 67px;
+                height: 24px;
+                line-height: 24px;
+                font-size: 14px;
+                color: $colorG;
+                margin-bottom: 20px;
+                &.new-pro {
+                  background-color: #7ecf68;
+                }
+                &.kill-pro {
+                  background-color: #e82626;
+                }
+              }
+              .item-img {
+                img {
+                  width: 236px;
+                  height: 150px;
+                }
+              }
+              .item-info {
+                h3 {
+                  font-size: 14px;
+                  font-weight: bold;
+                  color: $colorB;
+                  margin-bottom: 6px;
+                }
+                p {
+                  font-size: 12px;
+                  font-weight: bold;
+                  color: $colorD;
+                }
+                .price {
+                  font-size: 14px;
+                  font-weight: bold;
+                  color: #f20a0a;
+                  margin-top: 13px;
+                  &::after {
+                    content: " ";
+                    width: 16px;
+                    height: 12px;
+                    @include bgImg(16px, 12px, "/imgs/icon-cart-hover.png");
+                    margin-left: 5px;
+                    cursor: pointer;
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     }
   }
