@@ -1,0 +1,49 @@
+<template>
+  <div class="modal">
+    <div class="mask"></div>
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <span class="title">标题</span>
+        <a href="javascript:;" class="icon-close"></a>
+      </div>
+      <div class="modal-body">
+        <slot name="body"></slot>
+      </div>
+      <div class="modal-footer">
+        <a href="javascript:;" class="btn">确定</a>
+        <a href="javascript:;" class="btn">取消</a>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'modal',
+  //props接受变量
+  props: {
+    //模态框的样式 小small 中 middle  大large 表单form
+    modalType: {
+      type: String,
+      default: 'form'
+    },
+    //弹框标题
+    title: String,
+    //按钮类型 1：确定按钮  2：取消按钮 3 确定 取消都有
+    btnType: String,
+    sureText: {
+      type: String,
+      default: '确定'
+    },
+    cancelText: {
+      type: String,
+      default: '取消'
+    },
+    //是否展示模态框
+    showModal: Boolean,
+  }
+}
+</script>
+
+<style>
+</style>

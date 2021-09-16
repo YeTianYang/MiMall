@@ -22,8 +22,8 @@ export default {
 
 <style lang = "scss">
 /* 导入重置scss文件 */
-@import "../assets/scss/reset.scss";
-.all {
-  /* position: relative; */
-}
+/* @import "../assets/scss/reset.scss"; */
+/* .all {
+  position: relative;
+} */
 </style>
