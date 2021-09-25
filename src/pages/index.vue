@@ -57,10 +57,9 @@
         <swiper ref="mySwiper" :options="swiperOptions">
           <swiper-slide v-for="(item, index) in slideList" :key="index">
             <a href=""><img :src="item.img" alt="" /></a>
-            <div class="swiper-button-prev"></div>
-            <!--左箭头。如果放置在swiper-container外面，需要自定义样式。-->
-            <div class="swiper-button-next"></div>
           </swiper-slide>
+          <div class="swiper-button-prev" slot="button-prev"></div>
+          <div class="swiper-button-next" slot="button-next"></div>
           <div class="swiper-pagination" slot="pagination"></div>
         </swiper>
       </div>
@@ -98,7 +97,9 @@
                 <div class="item-info">
                   <h3>{{ phone.name }}</h3>
                   <p>{{ phone.subtitle }}</p>
-                  <p class="price">{{ phone.price }}元</p>
+                  <p class="price" @click="addCart(item.id)">
+                    {{ phone.price }}元
+                  </p>
                 </div>
               </div>
             </div>
@@ -106,6 +107,19 @@
         </div>
       </div>
     </div>
+    <modal
+      title="友情提示"
+      sureText="查看购物车"
+      :showModal="showModal"
+      @close="closeModal"
+      @sure="goToCart"
+      @cancel="showModal = false"
+      btnType="1"
+    >
+      <template v-slot:body>
+        <p>商品添加成功</p>
+      </template>
+    </modal>
     <service-bar></service-bar>
   </div>
 </template>
@@ -113,13 +127,16 @@
 <script>
 import ServiceBar from '../components/ServiceBar.vue'
 //导入轮播图组件
-import { Swiper, SwiperSlide } from 'vue-awesome-swiper';
-import 'swiper/css/swiper.css';
+import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
+import 'swiper/css/swiper.css'
+//导入模态框组件
+import Modal from '../components/Modal'
 export default {
   components: {
     ServiceBar,
     Swiper,
     SwiperSlide,
+    Modal,
   },
   data () {
     return {
@@ -220,7 +237,8 @@ export default {
           img: '/imgs/ads/ads-4.jpg'
         },
       ],
-      phoneList: [[]]
+      phoneList: [[]],
+      showModal: false
     }
   },
   mounted () {
@@ -237,14 +255,23 @@ export default {
         // console.log(res)
         this.phoneList = [res.list.slice(0, 4), res.list.slice(4, 8)]
       })
+    },
+    addCart () {
+      this.showModal = true
+    },
+    closeModal () {
+      this.showModal = false
+    },
+    goToCart () {
+      this.$router.push('/cart')
     }
   }
 }
 </script>
 
 <style lang="scss">
-@import "../assets/scss/mixin.scss";
 @import "../assets/scss/config.scss";
+@import "../assets/scss/mixin.scss";
 .index {
   // margin-top: 500px;
   .swiper-box {
